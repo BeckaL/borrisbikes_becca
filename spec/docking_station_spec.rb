@@ -6,13 +6,13 @@ describe DockingStation do
 
 	it 'releases bike when requested' do
 		docking_station = DockingStation.new
-		docking_station.dock_bike(Bike.new)
+		docking_station.dock_bike double(:Bike)
 		expect(docking_station.release_bike).to be_an_instance_of(Bike)
 	end
 
 it 'docks bikes at the docking station' do
 	docking_station = DockingStation.new
-	docking_station.dock_bike(Bike.new)
+	docking_station.dock_bike double(:Bike)
 	expect(docking_station.rack.length).to eq 1
 end
 
@@ -23,24 +23,24 @@ end
 
 it 'raises an error if trying to dock bike at a full station' do
 	docking_station = DockingStation.new
-	20.times { docking_station.dock_bike(Bike.new) }
-	expect { docking_station.dock_bike(Bike.new) }.to raise_error('Docking station full')
+	20.times { docking_station.dock_bike double(:Bike)}
+	expect { docking_station.dock_bike double(:Bike) }.to raise_error('Docking station full')
 end
 
 it 'lets user change capacity' do
 	docking_station = DockingStation.new(10)
-	10.times { docking_station.dock_bike(Bike.new) }
-	expect { docking_station.dock_bike(Bike.new) }.to raise_error('Docking station full')
+	10.times { docking_station.dock_bike double(:Bike) }
+	expect { docking_station.dock_bike double(:Bike) }.to raise_error('Docking station full')
 end
 
 it 'allows users to report if bike is broken' do
 	docking_station = DockingStation.new
-	expect(docking_station.dock_bike(Bike.new(true))).to eq "You have reported the bike broken"
+	expect(docking_station.dock_bike double(:Bike(true) ).to eq "You have reported the bike broken"
 end
 
 it 'refuses to release broken bikes' do
 	docking_station = DockingStation.new
-	docking_station.dock_bike(Bike.new(true))
+	docking_station.dock_bike double(:Bike(true) )
 	expect { docking_station.release_bike }.to raise_error('Cannot release bike. Bike is broken')
 end
 
