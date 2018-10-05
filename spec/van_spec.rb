@@ -19,14 +19,16 @@ describe Van do
 
   describe '#deposit_bikes_at_garage' do
 
-    it 'deposits bikes at garage' do
+    it 'van has no bikes after it deposits at garage' do
       van = Van.new
       bike = double :bike, working?: false
       van.van_bikes << bike
+      garage = double :garage, bikes: []
       van.deposit(garage)
       expect(van.van_bikes).to eq []
 
     end
+
   end
 
 end
